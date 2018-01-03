@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--2017/07/14 Andy Song - A remoted joystick with GoGoCam for CPF web app -->
+<head>
+	<title>Remote Control Car</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<center>
+		<div id="content">
+			<img src="images/controller.png" id="controller">
+			<img src="images/left_right_control.png" id="left_right_control"/>
+			<img src="images/left.png" id="left_control"><!--左-->
+			<img src="images/right.png" id="right_control"><!--右-->
+			<img src="images/top_bottom_control.png" id="top_bottom_control"/>
+			<img src="images/top.png" id="top_control"><!--上-->
+			<img src="images/bottom.png" id="bottom_control"><!--下-->
+			<div id="lightValue">100</div>
+
+			<img src="images/right_button.png" id="right_button"/><!--停-->
+			<img src="images/left_button.png" id="left_button"/><!--加速-->
+		</div>
+
+	</center>
+
+</body>
+
+<script>
+	//ML1 = 10
+	//ML2 = 9
+	//MR1 = 5
+	//MR2 = 6
+	setup();
+	var d10 = 0, d9 = 0;
+	var d5 = 0, d6 = 0;
+	var forword = document.getElementById("top_control");
+	var backword = document.getElementById("bottom_control");
+	var left = document.getElementById("left_control");
+	var right = document.getElementById("right_control");
+	var stop1 = document.getElementById("left_button");
+	var stop2 = document.getElementById("right_button");
+	var lightValue = 0;
+	var speed = 5;
+	
+	//顯示光數值
+	function loop() {
+		if(cpf){
+			lightValue = cpf.get("light sensor");
+			document.getElementById("lightValue").innerHTML = lightValue;
+		}
+		setTimeout("loop()", 1000);
+	}
+	
+	loop();
+
+	function carRun(){
+		cpf.request('["analogWrite", 10, ' + d10 + '],["analogWrite", 9, ' + d9 + '],["analogWrite", 5, ' + d5 + '],["analogWrite", 6, ' + d6 + ']');
+	}
+
+
+	function stop(){
+		//Motor Left
+		d10 = 0;
+		d9 = 0;
+		//Motor Right
+		d5 = 0;
+		d6 = 0;
+		carRun();
+	}
+
+	//停止
+	stop1.addEventListener('touchstart', function(event) {
+		stop();		
+	});
+	stop2.addEventListener('touchstart', function(event) {
+		stop();		
+	});
+
+	// 後退
+	backword.addEventListener('touchstart', function(event) {
+		//Motor Left
+		d10 = 0;
+		d9 = 127;
+		//Motor Right
+		d5 = 0;
+		d6 = 127;
+		carRun();
+	});
+	backword.addEventListener('touchend', function(event) {
+		stop();		
+	});
+	// 前進
+	forword.addEventListener('touchstart', function(event) {
+		//Motor Left
+		d10 = 127;
+		d9 = 0;
+		//Motor Right
+		d5 = 127;
+		d6 = 0;
+		carRun();
+	});
+	forword.addEventListener('touchend', function(event) {
+		stop();		
+	});
+	//左轉
+	left.addEventListener('touchstart', function(event) {
+		//Motor Left
+		d10 = 0;
+		d9 = 127;
+		//Motor Right
+		d5 = 127;
+		d6 = 0;
+		carRun();
+	});
+	left.addEventListener('touchend', function(event) {
+		stop();
+	});
+	//右轉
+	right.addEventListener('touchstart', function(event) {
+		//Motor Left
+		d10 = 127;
+		d9 = 0;
+		//Motor Right
+		d5 = 0;
+		d6 = 127;
+		carRun();
+	});	
+	right.addEventListener('touchend', function(event) {
+		stop();
+	});
+
+	function setup(){
+		//d12,d13前後
+		//d10,d11速度
+		if(cpf){
+			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "digital", 10, "PWM"],["setPinMode", "digital", 9,"PWM"],["setPinMode", "analog", 5,"PWM"],["setPinMode", "analog", 6,"PWM"]');
+		}
+	}
+</script>
+
+</html>
