@@ -44,7 +44,7 @@
 	var speed = 5;
 	
 	//顯示光數值
-	function loop() {
+	/*function loop() {
 		if(cpf){
 			lightValue = cpf.get("light sensor");
 			document.getElementById("lightValue").innerHTML = lightValue;
@@ -52,7 +52,7 @@
 		setTimeout("loop()", 10);
 	}
 	
-	loop();
+	loop()*/
 
 	function carRun(){
 		cpf.request('["analogWrite", 10, ' + d10 + '],["analogWrite", 9, ' + d9 + '],["analogWrite", 5, ' + d5 + '],["analogWrite", 6, ' + d6 + ']');
@@ -134,7 +134,7 @@
 		//d12,d13前後
 		//d10,d11速度
 		if(cpf){
-			cpf.setPinMode('["resetPin"],["setPinMode", "analog", 0, "INPUT"],["setPinMode", "digital", 10, "PWM"],["setPinMode", "digital", 9,"PWM"],["setPinMode", "analog", 5,"PWM"],["setPinMode", "analog", 6,"PWM"]');
+			cpf.setPinMode('["setPinMode", "digital", 10, "PWM"],["setPinMode", "digital", 9,"PWM"],["setPinMode", "analog", 5,"PWM"],["setPinMode", "analog", 6,"PWM"]');
 		}
 	}
 </script>
