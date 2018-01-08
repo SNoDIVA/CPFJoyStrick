@@ -106,11 +106,11 @@
 	//左轉
 	left.addEventListener('touchstart', function(event) {
 		//Motor Left
-		d10 = 0;
-		d9 = 127;
+		d10 = 127;
+		d9 = 0;
 		//Motor Right
-		d5 = 127;
-		d6 = 0;
+		d5 = 0;
+		d6 = 127;
 		carRun();
 	});
 	left.addEventListener('touchend', function(event) {
@@ -119,11 +119,11 @@
 	//右轉
 	right.addEventListener('touchstart', function(event) {
 		//Motor Left
-		d10 = 127;
-		d9 = 0;
+		d10 = 0;
+		d9 = 127;
 		//Motor Right
-		d5 = 0;
-		d6 = 127;
+		d5 = 127;
+		d6 = 0;
 		carRun();
 	});	
 	right.addEventListener('touchend', function(event) {
