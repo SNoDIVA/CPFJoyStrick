@@ -81,10 +81,10 @@
 	backword.addEventListener('touchstart', function(event) {
 		//Motor Left
 		d10 = 0;
-		d9 = 127;
+		d9 = 80;
 		//Motor Right
 		d5 = 0;
-		d6 = 127;
+		d6 = 80;
 		carRun();
 	});
 	backword.addEventListener('touchend', function(event) {
@@ -93,10 +93,10 @@
 	// 前進
 	forword.addEventListener('touchstart', function(event) {
 		//Motor Left
-		d10 = 127;
+		d10 = 80;
 		d9 = 0;
 		//Motor Right
-		d5 = 127;
+		d5 = 80;
 		d6 = 0;
 		carRun();
 	});
@@ -106,11 +106,11 @@
 	//左轉
 	left.addEventListener('touchstart', function(event) {
 		//Motor Left
-		d10 = 127;
+		d10 = 80;
 		d9 = 0;
 		//Motor Right
 		d5 = 0;
-		d6 = 127;
+		d6 = 80;
 		carRun();
 	});
 	left.addEventListener('touchend', function(event) {
@@ -120,9 +120,9 @@
 	right.addEventListener('touchstart', function(event) {
 		//Motor Left
 		d10 = 0;
-		d9 = 127;
+		d9 = 80;
 		//Motor Right
-		d5 = 127;
+		d5 = 80;
 		d6 = 0;
 		carRun();
 	});	
